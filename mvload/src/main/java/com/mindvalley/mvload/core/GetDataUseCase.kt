@@ -7,16 +7,11 @@ import com.mindvalley.mvload.core.mapper.StreamMapper
 import io.reactivex.Observable
 
 
-class GetDataUseCase<DataType>(executor: ExecutionThread,
+class GetDataUseCase<DataType>(executor: ExecutionThread, private val streamRepoImpl: StreamRepoImpl<DataType>,
                                private val mapper: StreamMapper<ByteArray, DataType>) : ObservableUseCase<DataType, RequestData>(executor) {
     override fun buildUseCaseObservable(params: RequestData?): Observable<DataType> {
 
-        val remote = RemoteRepoImpl()
-        val inMemory = InMemoryRepoImpl
-
-        return StreamRepoImpl<DataType>(remote = remote, inMemory = inMemory).getStream(params!!, mapper)
-
-
+        return streamRepoImpl.getStream(params!!, mapper)
     }
 
 
