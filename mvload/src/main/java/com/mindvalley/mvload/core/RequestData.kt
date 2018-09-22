@@ -10,14 +10,4 @@ enum class Method(val method: String) {
 }
 
 open class RequestData(val url: String, val method: Method = Method.GET,
-                       val urlParams: Map<String, String>? = null, val headers: Map<String, String>? = null) {
-
-    companion object {
-
-        fun forRequest(url: String, method: Method = Method.GET,
-                       urlParams: Map<String, String>? = null, headers: Map<String, String>? = null
-        ): RequestData {
-            return RequestData(url = url, method = method, urlParams = urlParams, headers = headers)
-        }
-    }
-}
+                       val urlParams: Map<String, String>? = null, val headers: Map<String, String>? = null)
