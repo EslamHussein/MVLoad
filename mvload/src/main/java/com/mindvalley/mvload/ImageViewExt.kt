@@ -11,7 +11,7 @@ fun ImageView.load(url: String, @DrawableRes placeHolder: Int? = null, @Drawable
 
     }
 
-    MVLoadClient().loadAsBitmap(url) { bitmap, _ ->
+    MVLoadClient().requestAsBitmap(url) { bitmap, _ ->
 
         if (bitmap != null)
             this.setImageBitmap(bitmap)

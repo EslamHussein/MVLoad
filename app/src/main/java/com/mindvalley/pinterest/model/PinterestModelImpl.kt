@@ -10,7 +10,7 @@ import javax.inject.Inject
 class PinterestModelImpl @Inject constructor(private val clint: MVLoadClient) : PinterestModel {
     override fun getPinterestList(callback: (List<PinterestItem>?, Throwable?) -> Unit) {
 
-        clint.loadAsGeneric("http://pastebin.com/raw/wgkJgazE",
+        clint.requestAsGeneric("http://pastebin.com/raw/wgkJgazE",
                 mapper = object : StreamMapper<ByteArray, List<PinterestItem>> {
                     override fun map(input: ByteArray): List<PinterestItem> {
                         return Gson().fromJson(String(input),
