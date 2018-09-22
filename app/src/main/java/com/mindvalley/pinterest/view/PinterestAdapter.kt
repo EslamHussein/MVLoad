@@ -4,9 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.mindvalley.R
 import com.mindvalley.base.view.AbstractPagingAdapter
+import com.mindvalley.mvload.load
 import com.mindvalley.pinterest.model.dto.PinterestItem
 
 class PinterestAdapter : AbstractPagingAdapter<PinterestItem, PinterestAdapter.ViewHolder>() {
@@ -26,9 +28,11 @@ class PinterestAdapter : AbstractPagingAdapter<PinterestItem, PinterestAdapter.V
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var usernameTextView: TextView = view.findViewById(R.id.usernameTextView)
+        private var pinterestImageView: ImageView = view.findViewById(R.id.pinterestImageView)
 
         fun bindData(item: PinterestItem) {
             usernameTextView.text = item.user.name
+            pinterestImageView.load(item.urls.regular)
         }
     }
 }

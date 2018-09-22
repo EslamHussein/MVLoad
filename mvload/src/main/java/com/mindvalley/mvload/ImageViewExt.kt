@@ -2,7 +2,7 @@ package com.mindvalley.mvload
 
 import android.support.annotation.DrawableRes
 import android.widget.ImageView
-import com.mindvalley.mvload.core.RequestData
+
 fun ImageView.load(url: String, @DrawableRes placeHolder: Int? = null, @DrawableRes errorImage: Int? = null) {
 
 
@@ -11,18 +11,14 @@ fun ImageView.load(url: String, @DrawableRes placeHolder: Int? = null, @Drawable
 
     }
 
-    val paramsImage = RequestData(url = url)
+    MVLoadClient().loadAsBitmap(url) { bitmap, _ ->
 
-//    MVLoadRequest.getInstance().load(paramsImage).asBitmap { bitmap, throwable ->
-//
-//
-//        if (bitmap != null)
-//            this.setImageBitmap(bitmap)
-//        else {
-//            errorImage?.also {
-//                this.setImageResource(it)
-//            }
-//        }
-//    }
-
+        if (bitmap != null)
+            this.setImageBitmap(bitmap)
+        else {
+            errorImage?.also {
+                this.setImageResource(it)
+            }
+        }
+    }
 }

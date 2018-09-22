@@ -4,8 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 
 class BitmapMapper : StreamMapper<ByteArray, Bitmap> {
-    override fun map(bytes: ByteArray): Bitmap {
-
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    override fun map(input: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(input, 0, input.size)
     }
 }

@@ -4,15 +4,12 @@ package com.mindvalley.pinterest.view
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.mindvalley.R
 import com.mindvalley.base.view.BaseFragment
-import com.mindvalley.mvload.MVLoadClint
-import com.mindvalley.mvload.core.mapper.StreamMapper
 import com.mindvalley.pinterest.contract.PinterestContract
 import com.mindvalley.pinterest.model.dto.PinterestItem
 import kotlinx.android.synthetic.main.fragment_pinterest_list.*
@@ -51,24 +48,6 @@ class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, Pint
             adapter = pinterestAdapter
         }
         pinterestSwipeRefresh.isEnabled = false
-
-        val clint = MVLoadClint("http://pastebin.com/raw/wgkJgazE")
-
-
-        clint.asJsonArray { array, throwable ->
-            Log.d("MainActivity", array?.length().toString())
-        }
-        clint.asGeneric(mapper = object : StreamMapper<ByteArray, String> {
-            override fun map(inputStream: ByteArray): String {
-
-                return String(inputStream)
-            }
-
-        }) { result, throwable ->
-
-            Log.d("MainActivity", result)
-
-        }
 
 
     }
