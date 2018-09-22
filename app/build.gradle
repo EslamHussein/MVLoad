@@ -25,6 +25,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     def supportDependencies = rootProject.ext.supportDependencies
@@ -37,7 +41,6 @@ dependencies {
     implementation supportDependencies.supportDesign
     implementation supportDependencies.recyclerView
     implementation supportDependencies.constraintLayout
-
 
     //kotlin
     implementation kotlinDependencies.kotlinStdlib
@@ -72,7 +75,7 @@ dependencies {
     androidTestImplementation(testingDependencies.espressoContrib) {
         exclude group: 'com.android.support'
     }
-    implementation (project(':mvload')){
+    implementation(project(':mvload')) {
         exclude group: 'com.android.support'
     }
 }
