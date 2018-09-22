@@ -5,16 +5,19 @@ import com.mindvalley.mvload.core.remote.RemoteRepo
 import com.mindvalley.mvload.core.mapper.StreamMapper
 import io.reactivex.Observable
 
-class StreamRepoImpl<DataType>(private val remote: RemoteRepo, private val inMemory: InMemoryRepo) {
 
-    fun getStream(params: RequestData, mapper: StreamMapper<ByteArray, DataType>): Observable<DataType> {
+interface StreamRepo {
+
+    fun getStream(params: RequestData): Observable<ByteArray>
+}
+
+class StreamRepoImpl(private val remote: RemoteRepo, private val inMemory: InMemoryRepo) : StreamRepo {
+
+    override fun getStream(params: RequestData): Observable<ByteArray> {
 
         return inMemory.getCached(params.url).switchIfEmpty(remote.getStream(params).doOnNext {
             inMemory.put(params.url, it)
-        }).map {
-            mapper.map(it)
-        }
-
+        })
     }
 
 }

@@ -23,11 +23,9 @@ class RemoteRepoImplTest {
 
         val requestData = RequestData("", Method.GET, null, null)
 
-
         val result = remoteRepo.getStream(requestData).test()
 
         result.assertError(MalformedURLException::class.java)
-
 
     }
 
