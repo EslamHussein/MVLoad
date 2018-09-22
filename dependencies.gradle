@@ -1,0 +1,70 @@
+ext {
+    androidSupportVersion = '28.0.0-alpha3'
+    daggerVersion = '2.15'
+    constraintLayoutVersion = '1.1.2'
+    rxAndroidVersion = '2.0.2'
+    rxKotlinVersion = '2.1.0'
+    kotlinVersion = '1.2.51'
+    junitVersion = '4.12'
+    supportTestRunnerVersion = '1.0.2'
+    espressoVersion = '3.0.2'
+    mockitoVersion = '2.8.47'
+    gsonVersion = '2.8.5'
+
+
+
+
+    supportDependencies = [
+
+            supportDesign   : "com.android.support:design:${androidSupportVersion}",
+            appcompat       : "com.android.support:appcompat-v7:${androidSupportVersion}",
+            recyclerView    : "com.android.support:recyclerview-v7:${androidSupportVersion}",
+            constraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
+    ]
+
+
+
+    rxDependencies = [
+
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxKotlin : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+    ]
+
+    daggerDependencies = [
+            dagger                  : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler          : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            daggerAndroid           : "com.google.dagger:dagger-android:${daggerVersion}",
+            daggerAndroidProcessor  : "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            daggerAndroidSupport    : "com.google.dagger:dagger-android-support:${daggerVersion}",
+            daggerAndroidSupportkapt: "com.google.dagger:dagger-android-support:${daggerVersion}",
+
+    ]
+
+
+    kotlinDependencies = [
+            kotlinStdlib : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+
+    ]
+
+    othersDependencies = [
+
+            gson: "com.google.code.gson:gson:${gsonVersion}"
+    ]
+
+    testingDependencies = [
+
+            junit                 : "junit:junit:${junitVersion}",
+            supportTestRunner     : "com.android.support.test:runner:${supportTestRunnerVersion}",
+            supportTestRules      : "com.android.support.test:rules:${supportTestRunnerVersion}",
+
+            espressoCore          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+
+            espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+            mockitoCore           : "org.mockito:mockito-core:${mockitoVersion}",
+            espressoContrib       : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}"
+
+    ]
+
+
+}
