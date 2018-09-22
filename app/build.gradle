@@ -60,6 +60,7 @@ dependencies {
 
     // Gson
     implementation othersDependencies.gson
+    implementation othersDependencies.circleImageView
 
     //Testing
     implementation testingDependencies.espressoIdlingResource

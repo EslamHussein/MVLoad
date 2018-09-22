@@ -3,7 +3,7 @@ package com.mindvalley.pinterest.view
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_pinterest_list.*
 
 private const val LIST_TAG = "LIST"
 private const val FIRST_VISIBLE_CELL_TAG = "FIRST_VISIBLE_CELL"
+private const val NUM_COLUMNS = 2
 
 
 class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, PinterestContract.PinterestPresenter>()
@@ -25,7 +26,7 @@ class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, Pint
 
     private var pinterestAdapter: PinterestAdapter? = null
 
-    private lateinit var viewManager: LinearLayoutManager
+    private lateinit var viewManager: StaggeredGridLayoutManager
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -39,15 +40,18 @@ class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, Pint
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewManager = LinearLayoutManager(context)
+        viewManager = StaggeredGridLayoutManager(NUM_COLUMNS, StaggeredGridLayoutManager.VERTICAL)
 
-        pinterestAdapter = PinterestAdapter()
+        pinterestAdapter = PinterestAdapter(context = context)
 
         pinterestRecyclerView.apply {
             layoutManager = viewManager
             adapter = pinterestAdapter
         }
-        pinterestSwipeRefresh.isEnabled = false
+        pinterestSwipeRefresh.setOnRefreshListener {
+            presenter.getPinterestList(pinterestAdapter?.getNextPageNumber() ?: 0)
+
+        }
 
 
     }
@@ -71,7 +75,7 @@ class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, Pint
     override fun onSaveInstanceState(outState: Bundle) {
 
         outState.putParcelableArrayList(LIST_TAG, pinterestAdapter?.getItems())
-        outState.putInt(FIRST_VISIBLE_CELL_TAG, viewManager.findFirstVisibleItemPosition())
+//        outState.putInt(FIRST_VISIBLE_CELL_TAG, viewManager.findFirstVisibleItemPosition())
         super.onSaveInstanceState(outState)
     }
 
