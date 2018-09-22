@@ -40,10 +40,13 @@ class PinterestAdapter(private val context: Context?) : AbstractPagingAdapter<Pi
 
     }
 
-    override fun addItems(newData: List<PinterestItem>) {
+    override fun addItems(newData: List<PinterestItem>, loadMore: Boolean) {
+
+
         val diffResult = DiffUtil.calculateDiff(PinterestDiffCallback(this.data, newData))
 
-        this.data.clear()
+        if (!loadMore)
+            this.data.clear()
         this.data.addAll(newData)
 
         diffResult.dispatchUpdatesTo(this)

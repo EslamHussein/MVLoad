@@ -49,7 +49,7 @@ class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, Pint
             adapter = pinterestAdapter
         }
         pinterestSwipeRefresh.setOnRefreshListener {
-            presenter.getPinterestList(pinterestAdapter?.getNextPageNumber() ?: 0)
+            presenter.getPinterestList(pinterestAdapter?.getNextPageNumber() ?: 0, false)
 
         }
 
@@ -63,9 +63,9 @@ class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, Pint
         if (savedInstanceState != null) {
             val list = savedInstanceState.getParcelableArrayList<PinterestItem>(LIST_TAG)
             val firstVisibleCellIndex = savedInstanceState.getInt(FIRST_VISIBLE_CELL_TAG, 0)
-            showSearchResultSuccess(list!!, firstVisibleCellIndex = firstVisibleCellIndex)
+            showSearchResultSuccess(list!!, firstVisibleCellIndex = firstVisibleCellIndex, loadMore = false)
         } else {
-            presenter.getPinterestList(pinterestAdapter?.getNextPageNumber() ?: 0)
+            presenter.getPinterestList(pinterestAdapter?.getNextPageNumber() ?: 0, false)
 
         }
 
@@ -94,10 +94,10 @@ class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, Pint
 
     }
 
-    override fun showSearchResultSuccess(projects: List<PinterestItem>, firstVisibleCellIndex: Int) {
+    override fun showSearchResultSuccess(projects: List<PinterestItem>, firstVisibleCellIndex: Int, loadMore: Boolean) {
         loadingStatusTextView.visibility = View.GONE
 
-        pinterestAdapter?.addItems(projects)
+        pinterestAdapter?.addItems(projects, loadMore)
 
     }
 

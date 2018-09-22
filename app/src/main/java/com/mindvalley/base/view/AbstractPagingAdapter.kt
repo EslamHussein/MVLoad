@@ -1,7 +1,6 @@
 package com.mindvalley.base.view
 
 import android.support.v7.widget.RecyclerView
-import android.support.v7.util.DiffUtil
 
 
 abstract class AbstractPagingAdapter<ItemType,
@@ -11,7 +10,7 @@ abstract class AbstractPagingAdapter<ItemType,
 
     fun getNextPageNumber(): Int = (itemCount / perPage)
 
-    abstract fun addItems(newData: List<ItemType>)
+    abstract fun addItems(newData: List<ItemType>, loadMore: Boolean)
 
     fun getItems(): ArrayList<ItemType> = data
     override fun getItemCount(): Int = data.count()
