@@ -2,6 +2,7 @@ package com.mindvalley.pinterest.view
 
 import android.content.Context
 import android.graphics.Color
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,8 @@ import com.mindvalley.pinterest.model.dto.PinterestItem
 import de.hdodenhof.circleimageview.CircleImageView
 
 class PinterestAdapter(private val context: Context?) : AbstractPagingAdapter<PinterestItem, PinterestAdapter.ViewHolder>() {
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater
                 .from(parent.context)
@@ -22,6 +25,7 @@ class PinterestAdapter(private val context: Context?) : AbstractPagingAdapter<Pi
         return ViewHolder(itemView)
 
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
@@ -36,6 +40,14 @@ class PinterestAdapter(private val context: Context?) : AbstractPagingAdapter<Pi
 
     }
 
+    override fun addItems(newData: List<PinterestItem>) {
+        val diffResult = DiffUtil.calculateDiff(PinterestDiffCallback(this.data, newData))
+
+        this.data.clear()
+        this.data.addAll(newData)
+
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var usernameTextView: TextView = view.findViewById(R.id.usernameTextView)

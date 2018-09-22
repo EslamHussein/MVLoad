@@ -7,6 +7,7 @@ import javax.inject.Inject
 class PinterestPresenterImpl @Inject constructor(private val model: PinterestModel) : PinterestContract.PinterestPresenter() {
     override fun getPinterestList(pageNumber: Int) {
 
+        view?.showLoading()
         model.getPinterestList { result, exception ->
             if (result != null)
                 view?.showSearchResultSuccess(result)
@@ -15,6 +16,7 @@ class PinterestPresenterImpl @Inject constructor(private val model: PinterestMod
                     view?.showSearchResultFailure(exception.localizedMessage)
                 }
             }
+            view?.hideLoading()
         }
     }
 }
