@@ -10,6 +10,7 @@ ext {
     espressoVersion = '3.0.2'
     mockitoVersion = '2.8.47'
     gsonVersion = '2.8.5'
+    circleImageViewVersion = '2.2.0'
 
 
 
@@ -49,7 +50,9 @@ ext {
 
     othersDependencies = [
 
-            gson: "com.google.code.gson:gson:${gsonVersion}"
+            gson           : "com.google.code.gson:gson:${gsonVersion}",
+            circleImageView: "de.hdodenhof:circleimageview:${circleImageViewVersion}"
+
     ]
 
     testingDependencies = [

@@ -9,11 +9,11 @@ interface PinterestContract {
     interface PinterestView : MvpView {
         fun showLoading()
         fun hideLoading()
-        fun showSearchResultSuccess(projects: List<PinterestItem>, firstVisibleCellIndex: Int = 0)
+        fun showSearchResultSuccess(projects: List<PinterestItem>, firstVisibleCellIndex: Int = 0, loadMore: Boolean)
         fun showSearchResultFailure(msg: String)
     }
 
-    abstract class PinterestPresenter : BasePresenter <PinterestView>() {
-        abstract fun getPinterestList(pageNumber: Int)
+    abstract class PinterestPresenter : BasePresenter<PinterestView>() {
+        abstract fun getPinterestList(pageNumber: Int, loadMore: Boolean)
     }
 }

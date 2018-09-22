@@ -3,6 +3,7 @@ package com.mindvalley.pinterest.injection
 import android.app.Application
 import com.mindvalley.App
 import com.mindvalley.pinterest.injection.module.ApplicationModule
+import com.mindvalley.pinterest.injection.module.ModelModule
 import com.mindvalley.pinterest.injection.module.PresentationModule
 import com.mindvalley.pinterest.injection.module.UIModule
 import dagger.BindsInstance
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [(AndroidInjectionModule::class), (ApplicationModule::class), (UIModule::class),
-    (PresentationModule::class)])
+    (PresentationModule::class), (ModelModule::class)])
 interface ApplicationComponent {
 
     @Component.Builder
