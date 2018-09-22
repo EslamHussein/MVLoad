@@ -5,7 +5,6 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.rxkotlin.toSingle
 
 
 abstract class ObservableUseCase<T, in Params> constructor(private val execution: ExecutionThread) {
@@ -14,7 +13,7 @@ abstract class ObservableUseCase<T, in Params> constructor(private val execution
     private val disposables = CompositeDisposable()
     abstract fun buildUseCaseObservable(params: Params? = null): Observable<T>
 
-    open fun execute(params: Params? = null, callback: (T?, Throwable?) -> Unit): ObservableUseCase<T, Params> {
+    open fun execute(params: Params? = null, callback: (T?, Throwable?) -> Unit) {
 
 
         val observable = this.buildUseCaseObservable(params = params)
@@ -37,7 +36,6 @@ abstract class ObservableUseCase<T, in Params> constructor(private val execution
 
         })
         addDisposable(disposable)
-        return this
     }
 
 
