@@ -18,6 +18,8 @@ abstract class ObservableUseCase<T, in Params> constructor(private val execution
 
 
         val observable = this.buildUseCaseObservable(params = params)
+                .subscribeOn(execution.subscribeScheduler)
+                .observeOn(execution.observerScheduler)
 
         val disposable = observable.subscribeWith(object : DisposableObserver<T>() {
             override fun onComplete() {
