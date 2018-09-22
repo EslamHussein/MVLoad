@@ -1,8 +1,10 @@
-package com.mindvalley
+package com.mindvalley.pinterest.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-class MainActivity : AppCompatActivity() {
+import com.mindvalley.R
+import dagger.android.support.DaggerAppCompatActivity
+
+class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -19,7 +19,7 @@ private const val LIST_TAG = "LIST"
 private const val FIRST_VISIBLE_CELL_TAG = "FIRST_VISIBLE_CELL"
 
 
-class PinterestListFragment : BaseFragment<PinterestContract.PinterestView, PinterestContract.PinterestPresenter>()
+class PinterestListFragment (): BaseFragment<PinterestContract.PinterestView, PinterestContract.PinterestPresenter>()
         , PinterestContract.PinterestView {
 
 
