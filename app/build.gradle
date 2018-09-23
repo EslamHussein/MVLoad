@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -20,14 +23,64 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    def supportDependencies = rootProject.ext.supportDependencies
+    def daggerDependencies = rootProject.ext.daggerDependencies
+    def kotlinDependencies = rootProject.ext.kotlinDependencies
+    def othersDependencies = rootProject.ext.othersDependencies
+    def testingDependencies = rootProject.ext.testingDependencies
+
+    implementation supportDependencies.appcompat
+    implementation supportDependencies.supportDesign
+    implementation supportDependencies.recyclerView
+    implementation supportDependencies.constraintLayout
+
+    //kotlin
+    implementation kotlinDependencies.kotlinStdlib
+    implementation kotlinDependencies.kotlinReflect
+
+    // Dagger
+    implementation daggerDependencies.dagger
+    kapt daggerDependencies.daggerCompiler
+    implementation daggerDependencies.daggerAndroid
+    kapt daggerDependencies.daggerAndroidProcessor
+    implementation daggerDependencies.daggerAndroidSupport
+    kapt daggerDependencies.daggerAndroidSupportkapt
+
+    // Gson
+    implementation othersDependencies.gson
+    implementation othersDependencies.circleImageView
+
+    //Testing
+    implementation testingDependencies.espressoIdlingResource
+
+
+    testImplementation testingDependencies.junit
+    testImplementation testingDependencies.mockitoCore
+
+    androidTestImplementation testingDependencies.supportTestRunner
+    androidTestImplementation testingDependencies.supportTestRules
+
+
+    androidTestImplementation(testingDependencies.espressoCore) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    androidTestImplementation(testingDependencies.espressoContrib) {
+        exclude group: 'com.android.support'
+    }
+    implementation(project(':mvload')) {
+        exclude group: 'com.android.support'
+    }
 }
