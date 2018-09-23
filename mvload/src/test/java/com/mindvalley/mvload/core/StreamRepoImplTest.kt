@@ -25,7 +25,7 @@ class StreamRepoImplTest {
         MockitoAnnotations.initMocks(this)
 
         streamRepo = StreamRepoImpl(remote, inMemory)
-        requestData = RequestData.forRequest("www.google.com/", Method.GET)
+        requestData = RequestData("www.google.com/", Method.GET)
 
         Mockito.`when`(remote.getStream(requestData)).thenReturn(Observable.just(ByteArray(10)))
 
