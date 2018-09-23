@@ -21,32 +21,31 @@ class GetDataUseCaseTest {
 
     private lateinit var getDataUseCase: GetDataUseCase<String>
 
+    private lateinit var testParam: RequestData
+
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
 
         getDataUseCase = GetDataUseCase(executor, streamRepoImpl, mapper)
 
-    }
-
-
-    @Test
-    fun getDataSuccess() {
-
         val resultBytes = ByteArray(10)
+        testParam = RequestData("www.google.com", method = Method.GET)
 
         // Given
 
-        val testParam = RequestData("www.google.com", method = Method.GET)
-
-
         Mockito.`when`(streamRepoImpl.getStream(testParam))
-                .thenReturn(io.reactivex.Observable.just(resultBytes))
+                .thenReturn(Observable.just(resultBytes))
 
 
         Mockito.`when`(mapper.map(resultBytes))
                 .thenReturn("{\"value\": \"Close\", \"onclick\": \"CloseDoc()\"} ")
 
+    }
+
+
+    @Test
+    fun getDataSuccess() {
 
         // When
         val testObservable = getDataUseCase.buildUseCaseObservable(testParam).test()
@@ -58,16 +57,6 @@ class GetDataUseCaseTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun getDataFailureWithNullParams() {
-
-        val result = ByteArray(10)
-
-        // Given
-
-        val testParam = RequestData("www.google.com", method = Method.GET)
-
-
-        Mockito.`when`(streamRepoImpl.getStream(testParam))
-                .thenReturn(Observable.just(result))
 
         // When
         val testObservable = getDataUseCase.buildUseCaseObservable().test()
