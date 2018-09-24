@@ -1,6 +1,6 @@
 # MVLoad
 
-Download & Cache images,json,xml etc and it in memory for Android
+Download & Cache images,json,xml etc... in memory for Android
 
 
 ## Download TODO puplish it to maven store
@@ -71,6 +71,6 @@ This is an Android Studio project using the Gradle build system, to build this p
 1. Build tools version 28.0.0-alpha3
 2. API level 28
 3. Android Studio 3 
-4. Gradel Version 3
+4. Gradle Version 3
 
 
